@@ -26,19 +26,6 @@ pipeline {
         }
       }
     }
-stage('Docker Build') {
-  steps {
-    bat 'wsl docker build -t library-app .'
-  }
-}
-
-stage('Deploy') {
-  steps {
-    bat 'wsl docker compose down'
-    bat 'wsl docker compose up -d --build'
-  }
-}
-
     stage('Package Artifact') {
       steps {
         bat 'dir target'
