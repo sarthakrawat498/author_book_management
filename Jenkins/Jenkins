@@ -6,25 +6,39 @@ pipeline {
 
 
   stages {
+    stage('Clean Workspace') {
+            steps{
+                deleteDir()
+            }
+    }
     stage('Checkout') {
-      steps { checkout scm }
-    }
-
-    stage('Build') {
-      steps {
-        bat 'mvn -B -DskipTests clean package'
-      }
-    }
-
-    stage('Test') {
-      steps {
-        bat 'mvn -B test'
-      }
-      post {
-        always {
-          junit 'target/surefire-reports/*.xml'
+          steps { checkout scm }
         }
-      }
+    stage('Build') {
+          steps {
+            bat 'mvn -B -DskipTests clean package'
+          }
+        }
+    stage('Test') {
+          steps {
+            bat 'mvn -B test'
+          }
+          post {
+            always {
+              junit 'target/surefire-reports/*.xml'
+            }
+          }
+        }
+    stage('Docker Build') {
+        steps {
+                bat 'docker build -t library-app:latest .'
+              }
+    }
+    stage('Deploy') {
+        steps {
+            bat 'docker-compose down'
+            bat 'docker-compose up -d'
+        }
     }
 
     stage('Package Artifact') {
