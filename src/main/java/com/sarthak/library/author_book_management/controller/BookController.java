@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/books")
+@Validated
 public class BookController {
     private final BookService bookService;
     private final BulkService bulkService;
@@ -62,10 +64,17 @@ public class BookController {
     //Read JSON Bulk
     @PostMapping("/bulk")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createBooksBulk(@RequestBody
-            @NotEmpty(message = "Book list cannot be empty")
-                                    @Size(max=100 , message = "Max 100 books allowed")
-                                    List<@Valid BookRequest> requests){
+    public void createBooksBulk(
+            @RequestBody List<@Valid BookRequest> requests
+    ) {
+        if (requests == null || requests.isEmpty()) {
+            throw new IllegalArgumentException("Book list cannot be empty");
+        }
+
+        if (requests.size() > 100) {
+            throw new IllegalArgumentException("Max 100 books allowed");
+        }
+
         bookService.createBooksBulk(requests);
     }
 
