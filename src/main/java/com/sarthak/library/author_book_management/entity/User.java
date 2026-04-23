@@ -1,6 +1,8 @@
 package com.sarthak.library.author_book_management.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Set;
@@ -15,12 +17,12 @@ import java.util.Set;
 public class User {
 
     @Id
+    @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 20, message = "Username must be 3-20 characters")
     private String username;
-
+    @NotBlank(message = "Password is required")
     private String password;
 
     private boolean enabled;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Authority> authorities;
 }

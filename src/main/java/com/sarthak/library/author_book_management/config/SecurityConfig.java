@@ -41,11 +41,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Swagger — public
                         .requestMatchers(PUBLIC_URLS).permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         // all GETs — Admin + Librarian
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN","LIBRARIAN")
+
                         // POST/PATCH/DELETE — Admin only
-                        .requestMatchers("/api/**")
-                        .hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());

@@ -2,6 +2,7 @@ package com.sarthak.library.author_book_management.service;
 
 import com.sarthak.library.author_book_management.entity.Authority;
 import com.sarthak.library.author_book_management.entity.User;
+import com.sarthak.library.author_book_management.repository.AuthorityRepository;
 import com.sarthak.library.author_book_management.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,23 +26,27 @@ class CustomUserDetailsServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private AuthorityRepository authorityRepository;
+
     @InjectMocks
     private CustomUserDetailsService customUserDetailsService;
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
-    private User buildUser(String username, String role, boolean enabled) {
-        User user = User.builder()
+    private User buildUser(String username, boolean enabled) {
+        return User.builder()
                 .username(username)
                 .password("encoded_password")
                 .enabled(enabled)
                 .build();
-        Authority authority = Authority.builder()
+    }
+
+    private Authority buildAuthority(String username, String role) {
+        return Authority.builder()
                 .authority(role)
-                .user(user)
+                .username(username)
                 .build();
-        user.setAuthorities(Set.of(authority));
-        return user;
     }
 
     // ── loadUserByUsername ────────────────────────────────────────────────────
@@ -49,8 +54,10 @@ class CustomUserDetailsServiceTest {
     @Test
     @DisplayName("loadUserByUsername: existing user — returns populated UserDetails")
     void loadUserByUsername_success() {
-        User user = buildUser("admin", "ROLE_ADMIN", true);
-        when(userRepository.findByUsername("admin")).thenReturn(Optional.of(user));
+        User user = buildUser("admin", true);
+        when(userRepository.findById("admin")).thenReturn(Optional.of(user));
+        when(authorityRepository.findByUsername("admin"))
+                .thenReturn(List.of(buildAuthority("admin", "ROLE_ADMIN")));
 
         UserDetails details = customUserDetailsService.loadUserByUsername("admin");
 
@@ -61,21 +68,20 @@ class CustomUserDetailsServiceTest {
                 .extracting("authority")
                 .containsExactly("ROLE_ADMIN");
 
-        verify(userRepository).findByUsername("admin");
+        verify(userRepository).findById("admin");
+        verify(authorityRepository).findByUsername("admin");
     }
 
     @Test
     @DisplayName("loadUserByUsername: multiple roles — all roles present in UserDetails")
     void loadUserByUsername_multipleRoles() {
-        User user = User.builder()
-                .username("librarian")
-                .password("pass")
-                .enabled(true)
-                .build();
-        Authority r1 = Authority.builder().authority("ROLE_LIBRARIAN").user(user).build();
-        Authority r2 = Authority.builder().authority("ROLE_ADMIN").user(user).build();
-        user.setAuthorities(Set.of(r1, r2));
-        when(userRepository.findByUsername("librarian")).thenReturn(Optional.of(user));
+        User user = buildUser("librarian", true);
+        when(userRepository.findById("librarian")).thenReturn(Optional.of(user));
+        when(authorityRepository.findByUsername("librarian"))
+                .thenReturn(List.of(
+                        buildAuthority("librarian", "ROLE_LIBRARIAN"),
+                        buildAuthority("librarian", "ROLE_ADMIN")
+                ));
 
         UserDetails details = customUserDetailsService.loadUserByUsername("librarian");
 
@@ -88,8 +94,10 @@ class CustomUserDetailsServiceTest {
     @Test
     @DisplayName("loadUserByUsername: disabled user — UserDetails.isEnabled() is false")
     void loadUserByUsername_disabledUser() {
-        User user = buildUser("inactive", "ROLE_LIBRARIAN", false);
-        when(userRepository.findByUsername("inactive")).thenReturn(Optional.of(user));
+        User user = buildUser("inactive", false);
+        when(userRepository.findById("inactive")).thenReturn(Optional.of(user));
+        when(authorityRepository.findByUsername("inactive"))
+                .thenReturn(List.of(buildAuthority("inactive", "ROLE_LIBRARIAN")));
 
         UserDetails details = customUserDetailsService.loadUserByUsername("inactive");
 
@@ -99,13 +107,13 @@ class CustomUserDetailsServiceTest {
     @Test
     @DisplayName("loadUserByUsername: unknown username — throws UsernameNotFoundException")
     void loadUserByUsername_notFound() {
-        when(userRepository.findByUsername("ghost")).thenReturn(Optional.empty());
+        when(userRepository.findById("ghost")).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> customUserDetailsService.loadUserByUsername("ghost"))
                 .isInstanceOf(UsernameNotFoundException.class)
                 .hasMessageContaining("User not found");
 
-        verify(userRepository).findByUsername("ghost");
+        verify(userRepository).findById("ghost");
+        verifyNoInteractions(authorityRepository);
     }
 }
-

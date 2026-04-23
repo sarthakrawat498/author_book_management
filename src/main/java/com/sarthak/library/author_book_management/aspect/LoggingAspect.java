@@ -30,7 +30,8 @@ public class LoggingAspect {
     // CONTROLLER LAYER — logs HTTP method, URI, authenticated user, and args
     // ─────────────────────────────────────────────────────────────────────────
 
-    @Before("execution(* com.sarthak.library.author_book_management.controller..*(..))")
+    @Before("execution(* com.sarthak.library.author_book_management.controller..*(..)) " +
+            "&& !execution(* com.sarthak.library.author_book_management.controller.UserController.*(..))")
     public void logControllerEntry(JoinPoint joinPoint) {
         String handler = joinPoint.getSignature().getDeclaringType().getSimpleName()
                 + "." + joinPoint.getSignature().getName() + "()";
@@ -58,7 +59,8 @@ public class LoggingAspect {
     }
 
     @AfterReturning(
-            pointcut = "execution(* com.sarthak.library.author_book_management.controller..*(..))",
+            pointcut = "execution(* com.sarthak.library.author_book_management.controller..*(..)) " +
+                       "&& !execution(* com.sarthak.library.author_book_management.controller.UserController.*(..))",
             returning = "result"
     )
     public void logControllerExit(JoinPoint joinPoint, Object result) {
@@ -112,7 +114,8 @@ public class LoggingAspect {
     // ─────────────────────────────────────────────────────────────────────────
 
     @Around("execution(* com.sarthak.library.author_book_management.service..*(..)) " +
-            "&& !execution(* com.sarthak.library.author_book_management.service.CustomUserDetailsService.*(..))")
+            "&& !execution(* com.sarthak.library.author_book_management.service.CustomUserDetailsService.*(..)) " +
+            "&& !execution(* com.sarthak.library.author_book_management.service.impl.UserServiceImpl.*(..))")
     public Object logServiceExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         String method = joinPoint.getSignature().getDeclaringType().getSimpleName()
                 + "." + joinPoint.getSignature().getName() + "()";
@@ -124,6 +127,41 @@ public class LoggingAspect {
 
         long elapsed = System.currentTimeMillis() - start;
         log.info("<<< [SERVICE] {} | Returned: {} | Took: {} ms", method, result, elapsed);
+        return result;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // ADMIN / USER MANAGEMENT — dedicated logging for UserController &
+    // UserServiceImpl (create user, update role, list users).
+    // ─────────────────────────────────────────────────────────────────────────
+
+    @Before("execution(* com.sarthak.library.author_book_management.controller.UserController.*(..))")
+    public void logAdminControllerEntry(JoinPoint joinPoint) {
+        String principal = resolveAuthenticatedUser();
+        String operation = joinPoint.getSignature().getName();
+        log.info(">>> [ADMIN] Operation: '{}' | Triggered by: {} | Args: {}",
+                operation, principal, Arrays.toString(joinPoint.getArgs()));
+    }
+
+    @AfterReturning(
+            pointcut = "execution(* com.sarthak.library.author_book_management.controller.UserController.*(..))",
+            returning = "result"
+    )
+    public void logAdminControllerExit(JoinPoint joinPoint, Object result) {
+        log.info("<<< [ADMIN] Operation: '{}' completed successfully | Response: {}",
+                joinPoint.getSignature().getName(), result);
+    }
+
+    @Around("execution(* com.sarthak.library.author_book_management.service.impl.UserServiceImpl.*(..))")
+    public Object logUserServiceExecution(ProceedingJoinPoint joinPoint) throws Throwable {
+        String method = joinPoint.getSignature().getName() + "()";
+        log.info(">>> [USER-SERVICE] {} | Args: {}", method, Arrays.toString(joinPoint.getArgs()));
+        long start = System.currentTimeMillis();
+
+        Object result = joinPoint.proceed();
+
+        long elapsed = System.currentTimeMillis() - start;
+        log.info("<<< [USER-SERVICE] {} | Returned: {} | Took: {} ms", method, result, elapsed);
         return result;
     }
 
