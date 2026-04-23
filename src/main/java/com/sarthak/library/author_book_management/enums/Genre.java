@@ -8,5 +8,6 @@ public enum Genre {
     HISTORY,
     BIOGRAPHY,
     FANTASY,
-    ROMANCE
+    ROMANCE,
+    HORROR
 }

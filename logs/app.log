@@ -2500,3 +2500,102 @@ Identify and stop the process that's listening on port 8081 or configure this ap
 2026-04-23 12:54:47.438 [http-nio-8085-exec-6] INFO  c.s.l.a.aspect.LoggingAspect - >>> [SERVICE] AuthorServiceImpl.getAllAuthors() | Args: []
 2026-04-23 12:54:47.489 [http-nio-8085-exec-6] INFO  c.s.l.a.aspect.LoggingAspect - <<< [SERVICE] AuthorServiceImpl.getAllAuthors() | Returned: [AuthorResponse(id=1, firstName=Rick , lastName=Jones, email=rick@jones.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=2, firstName=Rick Senior, lastName=Jones Junior, email=rickSr@jonesJr.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=3, firstName=John, lastName=Doe, email=john.doe@gmail.com, bio=Tech writer and software engineer), AuthorResponse(id=4, firstName=Jane, lastName=Smith, email=jane.smith@gmail.com, bio=Novelist and fiction author), AuthorResponse(id=5, firstName=Robert, lastName=Martin, email=unclebob@gmail.com, bio=Clean Code author and mentor), AuthorResponse(id=6, firstName=Yuval, lastName=Harari, email=yuval.harari@gmail.com, bio=Historian and author of Sapiens), AuthorResponse(id=7, firstName=J.K., lastName=Rowling, email=rowling@gmail.com, bio=Author of Harry Potter series), AuthorResponse(id=10, firstName=Supra, lastName=Karan, email=supra@karan.com, bio=An author of agile software dev)] | Took: 51 ms
 2026-04-23 12:54:47.491 [http-nio-8085-exec-6] INFO  c.s.l.a.aspect.LoggingAspect - <<< [CONTROLLER] AuthorController.getAllAuthors() | Response: [AuthorResponse(id=1, firstName=Rick , lastName=Jones, email=rick@jones.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=2, firstName=Rick Senior, lastName=Jones Junior, email=rickSr@jonesJr.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=3, firstName=John, lastName=Doe, email=john.doe@gmail.com, bio=Tech writer and software engineer), AuthorResponse(id=4, firstName=Jane, lastName=Smith, email=jane.smith@gmail.com, bio=Novelist and fiction author), AuthorResponse(id=5, firstName=Robert, lastName=Martin, email=unclebob@gmail.com, bio=Clean Code author and mentor), AuthorResponse(id=6, firstName=Yuval, lastName=Harari, email=yuval.harari@gmail.com, bio=Historian and author of Sapiens), AuthorResponse(id=7, firstName=J.K., lastName=Rowling, email=rowling@gmail.com, bio=Author of Harry Potter series), AuthorResponse(id=10, firstName=Supra, lastName=Karan, email=supra@karan.com, bio=An author of agile software dev)]
+2026-04-23 16:17:57.571 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 16:17:57.610 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-23 16:17:57.645 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 16:17:57.680 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 16:17:57.698 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 16:18:19.086 [main] INFO  c.s.l.a.AuthorBookManagementApplicationTests - Starting AuthorBookManagementApplicationTests using Java 21.0.9 with PID 10532 (started by sarthakrawat in C:\Users\sarthakrawat\OneDrive - Nagarro\Desktop\Spring_Boot_Assignment\author_book_management)
+2026-04-23 16:18:19.090 [main] INFO  c.s.l.a.AuthorBookManagementApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 16:18:20.679 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 16:18:20.802 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 4 JPA repository interfaces.
+2026-04-23 16:18:22.058 [main] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 16:18:22.194 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 16:18:23.222 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 16:18:23.319 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 16:18:23.930 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2cbc2db2
+2026-04-23 16:18:23.932 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 16:18:24.080 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 16:18:26.187 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 16:18:26.581 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 16:18:27.075 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 16:18:28.933 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23 16:18:29.208 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-04-23 16:18:30.995 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/library_db (PostgreSQL 18.1)
+2026-04-23 16:18:31.085 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 3 migrations (execution time 00:00.049s)
+2026-04-23 16:18:31.109 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-04-23 16:18:31.118 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-04-23 16:18:31.432 [main] INFO  c.s.l.a.AuthorBookManagementApplicationTests - Started AuthorBookManagementApplicationTests in 13.086 seconds (process running for 15.159)
+2026-04-23 16:18:31.438 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-23 16:18:31.438 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-23 16:18:32.099 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 16:18:32.103 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 16:18:32.113 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 16:18:51.142 [restartedMain] INFO  c.s.l.a.AuthorBookManagementApplication - Starting AuthorBookManagementApplication using Java 21.0.9 with PID 35604 (C:\Users\sarthakrawat\OneDrive - Nagarro\Desktop\Spring_Boot_Assignment\author_book_management\target\classes started by sarthakrawat in C:\Users\sarthakrawat\OneDrive - Nagarro\Desktop\Spring_Boot_Assignment\author_book_management)
+2026-04-23 16:18:51.148 [restartedMain] INFO  c.s.l.a.AuthorBookManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 16:18:51.232 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23 16:18:51.232 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23 16:18:52.852 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 16:18:52.974 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 100 ms. Found 4 JPA repository interfaces.
+2026-04-23 16:18:54.406 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8085 (http)
+2026-04-23 16:18:54.431 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-23 16:18:54.431 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 16:18:54.508 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 3275 ms
+2026-04-23 16:18:54.896 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 16:18:54.980 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 16:18:55.710 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 16:18:55.766 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 16:18:56.097 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@66578261
+2026-04-23 16:18:56.098 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 16:18:56.222 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 16:18:57.838 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 16:18:57.980 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 16:18:58.337 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 16:18:59.897 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23 16:19:00.138 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-04-23 16:19:01.748 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/library_db (PostgreSQL 18.1)
+2026-04-23 16:19:01.828 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 3 migrations (execution time 00:00.046s)
+2026-04-23 16:19:01.853 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2026-04-23 16:19:01.858 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-04-23 16:19:02.085 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8085 (http) with context path '/'
+2026-04-23 16:19:02.098 [restartedMain] INFO  c.s.l.a.AuthorBookManagementApplication - Started AuthorBookManagementApplication in 11.724 seconds (process running for 12.593)
+2026-04-23 16:19:02.103 [restartedMain] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-23 16:19:02.104 [restartedMain] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-23 16:20:38.378 [http-nio-8085-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 16:20:38.380 [http-nio-8085-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 16:20:38.384 [http-nio-8085-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-04-23 16:20:38.640 [http-nio-8085-exec-2] INFO  c.s.l.a.aspect.LoggingAspect - >>> [SECURITY] Authentication attempt for username: 'testuser'
+2026-04-23 16:20:39.138 [http-nio-8085-exec-2] INFO  c.s.l.a.aspect.LoggingAspect - <<< [SECURITY] User 'testuser' loaded | Enabled: true | Roles: [ROLE_LIBRARIAN] | Took: 496 ms
+2026-04-23 16:20:42.803 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - >>> [SECURITY] Authentication attempt for username: 'testuser'
+2026-04-23 16:20:42.816 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - <<< [SECURITY] User 'testuser' loaded | Enabled: true | Roles: [ROLE_LIBRARIAN] | Took: 12 ms
+2026-04-23 16:20:43.028 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - >>> [CONTROLLER] GET /api/authors | Handler: AuthorController.getAllAuthors() | User: testuser [ROLE_LIBRARIAN, FACTOR_PASSWORD] | Args: []
+2026-04-23 16:20:43.030 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - >>> [SERVICE] AuthorServiceImpl.getAllAuthors() | Args: []
+2026-04-23 16:20:43.126 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - <<< [SERVICE] AuthorServiceImpl.getAllAuthors() | Returned: [AuthorResponse(id=1, firstName=Rick , lastName=Jones, email=rick@jones.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=2, firstName=Rick Senior, lastName=Jones Junior, email=rickSr@jonesJr.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=3, firstName=John, lastName=Doe, email=john.doe@gmail.com, bio=Tech writer and software engineer), AuthorResponse(id=4, firstName=Jane, lastName=Smith, email=jane.smith@gmail.com, bio=Novelist and fiction author), AuthorResponse(id=5, firstName=Robert, lastName=Martin, email=unclebob@gmail.com, bio=Clean Code author and mentor), AuthorResponse(id=6, firstName=Yuval, lastName=Harari, email=yuval.harari@gmail.com, bio=Historian and author of Sapiens), AuthorResponse(id=7, firstName=J.K., lastName=Rowling, email=rowling@gmail.com, bio=Author of Harry Potter series), AuthorResponse(id=10, firstName=Supra, lastName=Karan, email=supra@karan.com, bio=An author of agile software dev)] | Took: 96 ms
+2026-04-23 16:20:43.131 [http-nio-8085-exec-3] INFO  c.s.l.a.aspect.LoggingAspect - <<< [CONTROLLER] AuthorController.getAllAuthors() | Response: [AuthorResponse(id=1, firstName=Rick , lastName=Jones, email=rick@jones.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=2, firstName=Rick Senior, lastName=Jones Junior, email=rickSr@jonesJr.com, bio=A novelist of science fiction and fantasy. ), AuthorResponse(id=3, firstName=John, lastName=Doe, email=john.doe@gmail.com, bio=Tech writer and software engineer), AuthorResponse(id=4, firstName=Jane, lastName=Smith, email=jane.smith@gmail.com, bio=Novelist and fiction author), AuthorResponse(id=5, firstName=Robert, lastName=Martin, email=unclebob@gmail.com, bio=Clean Code author and mentor), AuthorResponse(id=6, firstName=Yuval, lastName=Harari, email=yuval.harari@gmail.com, bio=Historian and author of Sapiens), AuthorResponse(id=7, firstName=J.K., lastName=Rowling, email=rowling@gmail.com, bio=Author of Harry Potter series), AuthorResponse(id=10, firstName=Supra, lastName=Karan, email=supra@karan.com, bio=An author of agile software dev)]
+2026-04-23 16:25:54.778 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 16:25:54.795 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-23 16:25:54.803 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 16:25:54.811 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 16:25:54.817 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -41,7 +41,6 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Book not found with id : " + id ));
         return BookMapper.toResponse(book);
-
     }
 
     @Override
